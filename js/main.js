@@ -211,6 +211,43 @@ class MockupShot {
 
     setupBackgroundSelector() {
         const bgBtns = document.querySelectorAll('.bg-btn');
+        const customBgOptions = document.getElementById('customBgOptions');
+        const customColorRow = document.getElementById('customColorRow');
+        const customGradientRow = document.getElementById('customGradientRow');
+        const customImageRow = document.getElementById('customImageRow');
+
+        // Stored custom background image
+        this.customBgImage = null;
+
+        // Color picker change handlers
+        document.getElementById('customColorPicker').addEventListener('input', (e) => {
+            if (this.currentBg === 'custom-color') this.updatePreview();
+        });
+
+        document.getElementById('customGradientFrom').addEventListener('input', (e) => {
+            if (this.currentBg === 'custom-gradient') this.updatePreview();
+        });
+
+        document.getElementById('customGradientTo').addEventListener('input', (e) => {
+            if (this.currentBg === 'custom-gradient') this.updatePreview();
+        });
+
+        // Custom background image upload
+        document.getElementById('customBgImageInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        this.customBgImage = img;
+                        if (this.currentBg === 'custom-image') this.updatePreview();
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         bgBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -225,6 +262,13 @@ class MockupShot {
                 } else {
                     previewContainer.classList.remove('transparent-bg');
                 }
+
+                // Show/hide custom background options
+                const isCustom = this.currentBg === 'custom-color' || this.currentBg === 'custom-gradient' || this.currentBg === 'custom-image';
+                customBgOptions.style.display = isCustom ? 'block' : 'none';
+                customColorRow.style.display = this.currentBg === 'custom-color' ? 'flex' : 'none';
+                customGradientRow.style.display = this.currentBg === 'custom-gradient' ? 'flex' : 'none';
+                customImageRow.style.display = this.currentBg === 'custom-image' ? 'flex' : 'none';
 
                 this.updatePreview();
             });
@@ -304,15 +348,13 @@ class MockupShot {
         const showFrameContainer = document.getElementById('showFrameContainer');
         const colorSelectorContainer = document.getElementById('colorSelectorContainer');
 
-        if (this.currentCategory === 'phones' || this.currentCategory === 'tablets') {
-            // Phones/Tablets use real PNG frames — show frame toggle, hide color picker
+        if (this.currentCategory === 'phones' || this.currentCategory === 'tablets' ||
+            this.currentCategory === 'laptops' || this.currentCategory === 'desktop' ||
+            this.currentCategory === 'browsers') {
+            // All device categories support frame toggle
             showFrameContainer.style.display = 'flex';
+            // Color picker only shown for categories that need it (none currently, all use PNG)
             colorSelectorContainer.style.display = 'none';
-        } else if (this.currentCategory === 'laptops' || this.currentCategory === 'desktop') {
-            // Canvas-drawn devices — show both frame toggle and color picker
-            showFrameContainer.style.display = 'flex';
-            colorSelectorContainer.style.display = 'block';
-            this.updateColorOptions();
         } else {
             showFrameContainer.style.display = 'none';
             colorSelectorContainer.style.display = 'none';
@@ -362,24 +404,9 @@ class MockupShot {
         // Route to appropriate renderer based on device type
         if (this.currentCategory === 'browsers') {
             this.renderBrowserPreview(ctx, img);
-        } else if (this.currentCategory === 'phones') {
-            this.renderPhonePreview(ctx, img);
-        } else if (this.currentCategory === 'tablets') {
-            this.renderPhonePreview(ctx, img);
-        } else if (this.currentCategory === 'laptops') {
-            const frame = this.deviceFrames[this.currentDevice];
-            if (frame && frame.img && frame.screen) {
-                this.renderPngFrameDevice(ctx, img, frame);
-            } else {
-                this.renderLaptopPreview(ctx, img);
-            }
-        } else if (this.currentCategory === 'desktop') {
-            const frame = this.deviceFrames[this.currentDevice];
-            if (frame && frame.img && frame.screen) {
-                this.renderPngFrameDevice(ctx, img, frame);
-            } else {
-                this.renderDesktopPreview(ctx, img);
-            }
+        } else if (this.currentCategory === 'phones' || this.currentCategory === 'tablets' ||
+                   this.currentCategory === 'laptops' || this.currentCategory === 'desktop') {
+            this.renderPngFrameDevice(ctx, img, this.deviceFrames[this.currentDevice]);
         }
 
         // Show canvas
@@ -410,23 +437,13 @@ class MockupShot {
             this.drawShadow(ctx, padding, padding, displayWidth, displayHeight + frameHeight);
         }
 
-        // Draw browser frame
-        this.drawBrowserFrame(ctx, padding, padding, displayWidth, displayHeight, frameHeight);
+        // Draw browser frame (only if showFrame is enabled)
+        if (this.showFrame) {
+            this.drawBrowserFrame(ctx, padding, padding, displayWidth, displayHeight, frameHeight);
+        }
 
         // Draw screenshot
         this.drawImage(ctx, img, padding, padding + frameHeight, displayWidth, displayHeight);
-    }
-
-    renderPhonePreview(ctx, img) {
-        const frame = this.deviceFrames[this.currentDevice];
-
-        // If we have a real PNG frame, use it
-        if (frame && frame.img && frame.screen) {
-            this.renderPngFrameDevice(ctx, img, frame);
-        } else {
-            // Fallback: old Canvas-drawn phone
-            this.renderCanvasPhone(ctx, img);
-        }
     }
 
     renderPngFrameDevice(ctx, img, frame) {
@@ -513,287 +530,37 @@ class MockupShot {
         }
     }
 
-    renderCanvasPhone(ctx, img) {
-        const padding = 80;
-        const phoneHeight = 700;
-        const phoneAspectRatio = 0.48;
-        const phoneWidth = phoneHeight * phoneAspectRatio;
-
-        const canvas = ctx.canvas;
-        canvas.width = (phoneWidth + padding * 2) * this.scale;
-        canvas.height = (phoneHeight + padding * 2) * this.scale;
-
-        ctx.scale(this.scale, this.scale);
-
-        // Draw background
-        this.drawBackground(ctx, phoneWidth + padding * 2, phoneHeight + padding * 2);
-
-        // Draw phone frame
-        this.drawPhoneFrame(ctx, padding, padding, phoneWidth, phoneHeight, img);
-    }
-
-    renderComingSoonPreview(ctx) {
-        const canvas = ctx.canvas;
-        canvas.width = 800 * this.scale;
-        canvas.height = 600 * this.scale;
-
-        ctx.scale(this.scale, this.scale);
-
-        // Draw background
-        this.drawBackground(ctx, 800, 600);
-
-        // Draw coming soon message
-        ctx.fillStyle = '#1f2937';
-        ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('Coming Soon', 400, 280);
-
-        ctx.fillStyle = '#6b7280';
-        ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.fillText('This device category is not yet available', 400, 320);
-    }
-
-    renderLaptopPreview(ctx, img) {
-        const padding = 80;
-        const lidHeight = 380;     // Lid (screen portion)
-        const baseHeight = 80;      // Keyboard base
-        const lidWidth = lidHeight * 1.6; // 16:10 screen ratio
-        const frameBezel = 18;       // Screen bezel thickness
-
-        const fullWidth = lidWidth + padding * 2;
-        const fullHeight = lidHeight + baseHeight + padding * 2 + 40;
-
-        const canvas = ctx.canvas;
-        canvas.width = fullWidth * this.scale;
-        canvas.height = fullHeight * this.scale;
-
-        ctx.scale(this.scale, this.scale);
-
-        // Draw background
-        this.drawBackground(ctx, fullWidth, fullHeight);
-
-        // Draw shadow
-        if (this.showShadow) {
-            this.drawShadow(ctx, padding, padding, lidWidth, lidHeight + baseHeight + 20);
-        }
-
-        if (this.showFrame) {
-            // Draw laptop base (keyboard deck)
-            const baseX = padding + lidWidth * 0.05;
-            const baseY = padding + lidHeight + 10;
-            const baseW = lidWidth * 0.9;
-            const baseH = baseHeight;
-
-            // Base bottom surface (dark gray)
-            ctx.fillStyle = '#2c2c2e';
-            this.roundRect(ctx, baseX, baseY, baseW, baseH, 8);
-            ctx.fill();
-
-            // Base top surface (keyboard deck)
-            const deckY = baseY - 3;
-            const deckH = baseHeight * 0.35;
-            ctx.fillStyle = '#3d3d40';
-            this.roundRect(ctx, baseX + 10, deckY, baseW - 20, deckH, 4);
-            ctx.fill();
-
-            // Keyboard keys (simplified as rows of small rects)
-            ctx.fillStyle = '#1c1c1e';
-            const keyRows = 4;
-            const keysPerRow = 12;
-            const keyboardLeft = baseX + baseW * 0.12;
-            const keyboardWidth = baseW * 0.76;
-            const keyboardTop = deckY + 8;
-            const keyboardHeight = deckH - 16;
-            const keyGapX = 3;
-            const keyGapY = 3;
-            const keyW = (keyboardWidth - keyGapX * (keysPerRow - 1)) / keysPerRow;
-            const keyH = (keyboardHeight - keyGapY * (keyRows - 1)) / keyRows;
-
-            for (let row = 0; row < keyRows; row++) {
-                const numKeys = row === keyRows - 1 ? keysPerRow - 3 : keysPerRow; // space bar gap
-                const offsetKeys = keysPerRow - numKeys;
-                for (let k = 0; k < numKeys; k++) {
-                    const kx = keyboardLeft + (k + offsetKeys * 0.5) * (keyW + keyGapX);
-                    const ky = keyboardTop + row * (keyH + keyGapY);
-                    ctx.fillRect(kx, ky, row === keyRows - 1 && k === numKeys - 4 ? keyW * 3 : keyW, keyH);
-                }
-            }
-
-            // Trackpad
-            const trackpadW = 80;
-            const trackpadH = 30;
-            const trackpadX = baseX + (baseW - trackpadW) / 2;
-            const trackpadY = baseY + baseH - trackpadH - 8;
-            ctx.fillStyle = '#4a4a4d';
-            this.roundRect(ctx, trackpadX, trackpadY, trackpadW, trackpadH, 4);
-            ctx.fill();
-
-            // Draw lid (screen bezel)
-            const bezelColor = this.getDeviceColors(this.currentDevice).find(c => c.name === this.deviceColor)?.value || '#e8e8ed';
-            ctx.fillStyle = bezelColor;
-            this.roundRect(ctx, padding, padding, lidWidth, lidHeight, 12);
-            ctx.fill();
-
-            // Screen area (the actual display)
-            const screenX = padding + frameBezel;
-            const screenY = padding + frameBezel;
-            const screenW = lidWidth - frameBezel * 2;
-            const screenH = lidHeight - frameBezel * 2;
-
-            ctx.fillStyle = '#000000';
-            this.roundRect(ctx, screenX, screenY, screenW, screenH, 6);
-            ctx.fill();
-
-            // Draw screenshot inside screen
-            if (img) {
-                const imgAspect = img.width / img.height;
-                const screenAspect = screenW / screenH;
-                let drawW, drawH, drawX, drawY;
-
-                if (imgAspect > screenAspect) {
-                    drawW = screenW;
-                    drawH = screenW / imgAspect;
-                    drawX = screenX;
-                    drawY = screenY + (screenH - drawH) / 2;
-                } else {
-                    drawH = screenH;
-                    drawW = screenH * imgAspect;
-                    drawX = screenX + (screenW - drawW) / 2;
-                    drawY = screenY;
-                }
-
-                ctx.save();
-                this.roundRect(ctx, screenX, screenY, screenW, screenH, 6);
-                ctx.clip();
-                ctx.drawImage(img, drawX, drawY, drawW, drawH);
-                ctx.restore();
-            }
-
-            // Lid bottom hinge highlight
-            ctx.fillStyle = '#1a1a1c';
-            ctx.fillRect(padding + lidWidth * 0.3, padding + lidHeight - 4, lidWidth * 0.4, 4);
-        } else {
-            // No frame — just show the image centered
-            if (img) {
-                const imgW = Math.min(img.width, lidWidth - 60);
-                const imgH = imgW / (img.width / img.height);
-                const imgX = padding + (lidWidth - imgW) / 2;
-                const imgY = padding + (lidHeight - imgH) / 2;
-                ctx.drawImage(img, imgX, imgY, imgW, imgH);
-            }
-        }
-    }
-
-    renderDesktopPreview(ctx, img) {
-        const padding = 90;
-        const screenWidth = 500;
-        const screenHeight = 320;  // ~16:10
-        const standNeckH = 60;
-        const standBaseW = 180;
-        const standBaseH = 18;
-        const bezel = 16;
-
-        const fullWidth = screenWidth + padding * 2;
-        const fullHeight = screenHeight + standNeckH + standBaseH + padding * 2 + 30;
-
-        const canvas = ctx.canvas;
-        canvas.width = fullWidth * this.scale;
-        canvas.height = fullHeight * this.scale;
-
-        ctx.scale(this.scale, this.scale);
-
-        // Draw background
-        this.drawBackground(ctx, fullWidth, fullHeight);
-
-        // Draw shadow for the whole iMac
-        if (this.showShadow) {
-            this.drawShadow(ctx, padding, padding - 10, screenWidth, screenHeight + standNeckH + standBaseH + 20);
-        }
-
-        if (this.showFrame) {
-            // Draw stand base
-            const baseX = padding + (screenWidth - standBaseW) / 2;
-            const baseY = padding + screenHeight + standNeckH;
-            ctx.fillStyle = '#1a1a1c';
-            this.roundRect(ctx, baseX, baseY, standBaseW, standBaseH, 4);
-            ctx.fill();
-
-            // Draw stand neck
-            const neckW = 20;
-            const neckX = padding + (screenWidth - neckW) / 2;
-            const neckY = padding + screenHeight;
-            ctx.fillStyle = '#2c2c2e';
-            ctx.fillRect(neckX, neckY, neckW, standNeckH);
-
-            // Draw chin (iMac chin below screen)
-            const chinH = 20;
-            const chinY = padding + screenHeight - chinH;
-            const bezelColor = this.getDeviceColors(this.currentDevice).find(c => c.name === this.deviceColor)?.value || '#2176ff';
-
-            // Main screen bezel
-            ctx.fillStyle = '#1a1a1c';
-            this.roundRect(ctx, padding, padding, screenWidth, screenHeight, 10);
-            ctx.fill();
-
-            // Color accent on chin
-            ctx.fillStyle = bezelColor;
-            ctx.fillRect(padding + 2, chinY, screenWidth - 4, chinH);
-
-            // Screen area
-            const screenX = padding + bezel;
-            const screenY = padding + 10;
-            const screenW = screenWidth - bezel * 2;
-            const screenH = screenHeight - bezel - 10;
-
-            ctx.fillStyle = '#000000';
-            this.roundRect(ctx, screenX, screenY, screenW, screenH, 4);
-            ctx.fill();
-
-            // Draw screenshot inside screen
-            if (img) {
-                const imgAspect = img.width / img.height;
-                const screenAspect = screenW / screenH;
-                let drawW, drawH, drawX, drawY;
-
-                if (imgAspect > screenAspect) {
-                    drawW = screenW;
-                    drawH = screenW / imgAspect;
-                    drawX = screenX;
-                    drawY = screenY + (screenH - drawH) / 2;
-                } else {
-                    drawH = screenH;
-                    drawW = screenH * imgAspect;
-                    drawX = screenX + (screenW - drawW) / 2;
-                    drawY = screenY;
-                }
-
-                ctx.save();
-                this.roundRect(ctx, screenX, screenY, screenW, screenH, 4);
-                ctx.clip();
-                ctx.drawImage(img, drawX, drawY, drawW, drawH);
-                ctx.restore();
-            }
-
-            // Power LED on chin
-            ctx.fillStyle = '#30d158';
-            ctx.beginPath();
-            ctx.arc(padding + screenWidth / 2, chinY + chinH / 2, 3, 0, Math.PI * 2);
-            ctx.fill();
-        } else {
-            // No frame — just show the image centered
-            if (img) {
-                const imgW = Math.min(img.width, screenWidth - 40);
-                const imgH = imgW / (img.width / img.height);
-                const imgX = padding + (screenWidth - imgW) / 2;
-                const imgY = padding + (screenHeight - imgH) / 2;
-                ctx.drawImage(img, imgX, imgY, imgW, imgH);
-            }
-        }
-    }
-
     drawBackground(ctx, width, height) {
         // Transparent = skip drawing entirely (Canvas default is transparent)
         if (this.currentBg === 'transparent') return;
+
+        // Custom solid color
+        if (this.currentBg === 'custom-color') {
+            const color = document.getElementById('customColorPicker').value || '#667eea';
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, width, height);
+            return;
+        }
+
+        // Custom gradient
+        if (this.currentBg === 'custom-gradient') {
+            const from = document.getElementById('customGradientFrom').value || '#ff6b6b';
+            const to = document.getElementById('customGradientTo').value || '#c084fc';
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, from);
+            gradient.addColorStop(1, to);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            return;
+        }
+
+        // Custom background image
+        if (this.currentBg === 'custom-image' && this.customBgImage) {
+            ctx.save();
+            ctx.drawImage(this.customBgImage, 0, 0, width, height);
+            ctx.restore();
+            return;
+        }
 
         const gradients = {
             gradient: ['#667eea', '#764ba2'],
@@ -826,9 +593,15 @@ class MockupShot {
     drawBrowserFrame(ctx, x, y, width, height, frameHeight) {
         const radius = 12;
 
+        if (this.currentDevice === 'safari') {
+            // Safari-style frame: rounded-top toolbar with URL bar, no window border
+            this.drawSafariFrame(ctx, x, y, width, height, frameHeight);
+            return;
+        }
+
         // Draw window background
         ctx.fillStyle = '#ffffff';
-        ctx.shadowColor = 'transparent';        // Reset shadow
+        ctx.shadowColor = 'transparent';
         this.roundRect(ctx, x, y, width, height + frameHeight, radius);
         ctx.fill();
 
@@ -848,19 +621,76 @@ class MockupShot {
         ctx.stroke();
     }
 
+    drawSafariFrame(ctx, x, y, width, height, frameHeight) {
+        // Safari has a distinctive rounded toolbar with unified URL bar
+        const radius = 12;
+
+        // Draw Safari window body
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'transparent';
+        this.roundRect(ctx, x, y, width, height + frameHeight, radius);
+        ctx.fill();
+
+        // Window border
+        ctx.strokeStyle = '#e5e7eb';
+        ctx.lineWidth = 1;
+        this.roundRect(ctx, x, y, width, height + frameHeight, radius);
+        ctx.stroke();
+
+        // Draw window control buttons
+        this.drawWindowControls(ctx, x + 16, y + 16);
+
+        // Safari-style smart search bar (pill-shaped URL bar)
+        const urlBarY = y + 14;
+        const urlBarH = 26;
+        const urlBarPadding = 100;  // leave space for controls
+        const urlBarW = width - urlBarPadding - 14;
+        const urlBarX = x + urlBarPadding;
+
+        ctx.fillStyle = '#f2f2f7';
+        this.roundRect(ctx, urlBarX, urlBarY, urlBarW, urlBarH, 13);
+        ctx.fill();
+
+        // URL text
+        ctx.fillStyle = '#8e8e93';
+        ctx.font = '11px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('mockupshot.online', urlBarX + 14, urlBarY + urlBarH / 2);
+
+        // Separator line below toolbar
+        ctx.strokeStyle = '#e5e7eb';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x + 1, y + frameHeight);
+        ctx.lineTo(x + width - 1, y + frameHeight);
+        ctx.stroke();
+    }
+
     drawWindowControls(ctx, x, y) {
-        const buttonColors = {
+        const buttonSize = 12;
+        const gap = 8;
+
+        if (this.currentDevice === 'safari') {
+            // Safari-style controls: slightly larger, more spacing
+            const safariColors = ['#ff5f57', '#ffbd2e', '#28c940'];
+            safariColors.forEach((color, index) => {
+                ctx.beginPath();
+                ctx.arc(x + index * (buttonSize + gap), y, buttonSize / 2, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+            });
+            return;
+        }
+
+        const colors = {
             chrome: ['#ff5f57', '#ffbd2e', '#28c940'],
-            safari: ['#ff5f57', '#ffbd2e', '#28c940'],
             firefox: ['#ff5f57', '#ffbd2e', '#28c940'],
             edge: ['#ff5f57', '#ffbd2e', '#28c940']
         };
 
-        const colors = buttonColors[this.currentDevice] || buttonColors.chrome;
-        const buttonSize = 12;
-        const gap = 8;
-
-        colors.forEach((color, index) => {
+        const deviceColors = colors[this.currentDevice] || colors.chrome;
+        deviceColors.forEach((color, index) => {
             ctx.beginPath();
             ctx.arc(x + index * (buttonSize + gap), y, buttonSize / 2, 0, Math.PI * 2);
             ctx.fillStyle = color;
@@ -870,166 +700,6 @@ class MockupShot {
 
     drawImage(ctx, img, x, y, width, height) {
         ctx.drawImage(img, x, y, width, height);
-    }
-
-    drawPhoneFrame(ctx, x, y, width, height, img) {
-        const colors = this.getDeviceColors(this.currentDevice);
-        const frameColor = colors.find(c => c.name === this.deviceColor)?.value || '#1d1d1f';
-
-        // Draw shadow
-        if (this.showShadow) {
-            this.drawShadow(ctx, x, y, width, height);
-        }
-
-        // Draw phone frame
-        if (this.showFrame) {
-            ctx.fillStyle = frameColor;
-            this.roundRect(ctx, x, y, width, height, 40);
-            ctx.fill();
-
-            // Draw screen area
-            const screenMargin = 15;
-            const screenX = x + screenMargin;
-            const screenY = y + screenMargin;
-            const screenWidth = width - screenMargin * 2;
-            const screenHeight = height - screenMargin * 2;
-
-            ctx.fillStyle = '#000000';
-            this.roundRect(ctx, screenX, screenY, screenWidth, screenHeight, 30);
-            ctx.fill();
-
-            // Draw phone-specific features
-            this.drawPhoneFeatures(ctx, screenX, screenY, screenWidth, screenHeight);
-
-            // Draw user image inside screen
-            if (img) {
-                const imgAspectRatio = img.width / img.height;
-                const screenAspectRatio = screenWidth / screenHeight;
-
-                let drawWidth, drawHeight, drawX, drawY;
-
-                if (imgAspectRatio > screenAspectRatio) {
-                    drawWidth = screenWidth;
-                    drawHeight = screenWidth / imgAspectRatio;
-                    drawX = screenX;
-                    drawY = screenY + (screenHeight - drawHeight) / 2;
-                } else {
-                    drawHeight = screenHeight;
-                    drawWidth = screenHeight * imgAspectRatio;
-                    drawX = screenX + (screenWidth - drawWidth) / 2;
-                    drawY = screenY;
-                }
-
-                ctx.save();
-                this.roundRect(ctx, screenX, screenY, screenWidth, screenHeight, 30);
-                ctx.clip();
-                ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-                ctx.restore();
-            }
-        } else {
-            // No frame, just show the image
-            if (img) {
-                const imgAspectRatio = img.width / img.height;
-                const screenAspectRatio = width / height;
-
-                let drawWidth, drawHeight, drawX, drawY;
-
-                if (imgAspectRatio > screenAspectRatio) {
-                    drawWidth = width;
-                    drawHeight = width / imgAspectRatio;
-                    drawX = x;
-                    drawY = y + (height - drawHeight) / 2;
-                } else {
-                    drawHeight = height;
-                    drawWidth = height * imgAspectRatio;
-                    drawX = x + (width - drawWidth) / 2;
-                    drawY = y;
-                }
-
-                ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-            }
-        }
-    }
-
-    drawPhoneFeatures(ctx, screenX, screenY, screenWidth, screenHeight) {
-        if (this.currentDevice === 'iphone-17' || this.currentDevice === 'iphone-17-pro') {
-            // Dynamic Island (pill-shaped notch)
-            const islandWidth = 120;
-            const islandHeight = 35;
-            const islandX = screenX + (screenWidth - islandWidth) / 2;
-            const islandY = screenY + 15;
-
-            ctx.fillStyle = '#000000';
-            this.roundRect(ctx, islandX, islandY, islandWidth, islandHeight, 17);
-            ctx.fill();
-
-            // Side buttons
-            if (this.currentDevice === 'iphone-17') {
-                // Mute switch
-                ctx.fillStyle = '#3a3a3c';
-                ctx.fillRect(screenX - 8, screenY + 150, 6, 30);
-
-                // Volume buttons
-                ctx.fillRect(screenX - 8, screenY + 200, 6, 50);
-                ctx.fillRect(screenX - 8, screenY + 260, 6, 50);
-
-                // Power button
-                ctx.fillRect(screenX + screenWidth + 2, screenY + 200, 6, 80);
-            } else if (this.currentDevice === 'iphone-17-pro') {
-                // Action button (replaces mute switch)
-                ctx.fillStyle = '#3a3a3c';
-                ctx.fillRect(screenX - 8, screenY + 150, 6, 30);
-
-                // Volume buttons
-                ctx.fillRect(screenX - 8, screenY + 200, 6, 50);
-                ctx.fillRect(screenX - 8, screenY + 260, 6, 50);
-
-                // Power button
-                ctx.fillRect(screenX + screenWidth + 2, screenY + 200, 6, 80);
-
-                // Camera bar hint at bottom (Pro feature)
-                ctx.fillStyle = '#2a2a2c';
-                ctx.fillRect(screenX + screenWidth / 2 - 80, screenY + screenHeight - 8, 160, 4);
-            }
-
-            // Home indicator
-            ctx.fillStyle = '#ffffff';
-            ctx.globalAlpha = 0.6;
-            const homeIndicatorWidth = 140;
-            const homeIndicatorHeight = 5;
-            const homeIndicatorX = screenX + (screenWidth - homeIndicatorWidth) / 2;
-            const homeIndicatorY = screenY + screenHeight - 20;
-            this.roundRect(ctx, homeIndicatorX, homeIndicatorY, homeIndicatorWidth, homeIndicatorHeight, 2);
-            ctx.fill();
-            ctx.globalAlpha = 1.0;
-
-        } else if (this.currentDevice === 'galaxy-s24') {
-            // Center punch-hole camera
-            const cameraHoleRadius = 8;
-            const cameraX = screenX + screenWidth / 2;
-            const cameraY = screenY + 20;
-
-            ctx.fillStyle = '#000000';
-            ctx.beginPath();
-            ctx.arc(cameraX, cameraY, cameraHoleRadius, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Side buttons (power + volume on right side)
-            ctx.fillStyle = '#3a3a3c';
-            ctx.fillRect(screenX + screenWidth + 2, screenY + 180, 6, 70);
-            ctx.fillRect(screenX + screenWidth + 2, screenY + 260, 6, 70);
-
-            // Home indicator
-            ctx.fillStyle = '#ffffff';
-            ctx.globalAlpha = 0.6;
-            const homeIndicatorWidth = 140;
-            const homeIndicatorHeight = 5;
-            const homeIndicatorX = screenX + (screenWidth - homeIndicatorWidth) / 2;
-            const homeIndicatorY = screenY + screenHeight - 20;
-            this.roundRect(ctx, homeIndicatorX, homeIndicatorY, homeIndicatorWidth, homeIndicatorHeight, 2);
-            ctx.fill();
-            ctx.globalAlpha = 1.0;
-        }
     }
 
     roundRect(ctx, x, y, width, height, radius) {

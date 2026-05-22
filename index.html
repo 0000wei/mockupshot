@@ -7,6 +7,7 @@
     <meta name="description" content="MockupShot is a free device mockup generator. Supports browser frames (Chrome, Safari, Firefox, Edge) and phone frames (iPhone 17, iPhone 17 Pro, Samsung Galaxy S24). Upload screenshots, choose a device frame, and generate professional product showcase images with one click.">
     <meta name="keywords" content="browser mockup generator, phone mockup generator, screenshot mockup generator, Chrome frame, Safari frame, iPhone frame, product screenshot, website showcase">
     <link rel="canonical" href="https://mockupshot.online/">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
@@ -200,6 +201,34 @@
                                 <button class="bg-btn" data-bg="solid" style="background: #f3f4f6;">
                                     <span class="bg-name">Solid Gray</span>
                                 </button>
+                                <button class="bg-btn" data-bg="custom-color" style="background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);">
+                                    <span class="bg-name">Custom Color</span>
+                                </button>
+                                <button class="bg-btn" data-bg="custom-gradient" style="background: linear-gradient(135deg, #ff6b6b, #c084fc);">
+                                    <span class="bg-name">Custom Gradient</span>
+                                </button>
+                                <button class="bg-btn" data-bg="custom-image" style="background: repeating-linear-gradient(45deg, #ccc 0px, #ccc 10px, #aaa 10px, #aaa 20px);">
+                                    <span class="bg-name">Custom Image</span>
+                                </button>
+                            </div>
+                            <div class="custom-bg-options" id="customBgOptions" style="display: none;">
+                                <!-- Color picker for custom-color -->
+                                <div class="custom-bg-row" id="customColorRow" style="display: none;">
+                                    <label class="option-label" for="customColorPicker">Pick a color:</label>
+                                    <input type="color" id="customColorPicker" value="#667eea" class="color-picker">
+                                </div>
+                                <!-- Dual color picker for custom-gradient -->
+                                <div class="custom-bg-row" id="customGradientRow" style="display: none;">
+                                    <label class="option-label">Gradient from:</label>
+                                    <input type="color" id="customGradientFrom" value="#ff6b6b" class="color-picker">
+                                    <label class="option-label" style="margin-left:8px;">to:</label>
+                                    <input type="color" id="customGradientTo" value="#c084fc" class="color-picker">
+                                </div>
+                                <!-- Image upload for custom-image -->
+                                <div class="custom-bg-row" id="customImageRow" style="display: none;">
+                                    <label class="option-label">Upload a background image:</label>
+                                    <input type="file" id="customBgImageInput" accept="image/*" class="bg-image-input">
+                                </div>
                             </div>
                         </div>
 
