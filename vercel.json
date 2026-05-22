@@ -1,59 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/css/(.*)",
-      "dest": "/css/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/js/(.*)",
-      "dest": "/js/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/chrome-browser-frame/",
-      "dest": "/chrome-browser-frame/index.html"
-    },
-    {
-      "src": "/safari-browser-frame/",
-      "dest": "/safari-browser-frame/index.html"
-    },
-    {
-      "src": "/firefox-browser-frame/",
-      "dest": "/firefox-browser-frame/index.html"
-    },
-    {
-      "src": "/edge-browser-frame/",
-      "dest": "/edge-browser-frame/index.html"
-    },
-    {
-      "src": "/macbook-screenshot-frame/",
-      "dest": "/macbook-screenshot-frame/index.html"
-    },
-    {
-      "src": "/imac-screenshot-frame/",
-      "dest": "/imac-screenshot-frame/index.html"
-    },
-    {
-      "src": "/ipad-screenshot-frame/",
-      "dest": "/ipad-screenshot-frame/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -77,7 +22,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg))",
+      "source": "/:file*.(css|js|png|jpg|jpeg|gif|ico|svg|webp)",
       "headers": [
         {
           "key": "Cache-Control",
