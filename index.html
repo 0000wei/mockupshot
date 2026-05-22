@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockupShot - Device Mockup Generator | Browser & Phone Frame Tool</title>
+    <meta name="description" content="MockupShot is a free device mockup generator. Supports browser frames (Chrome, Safari, Firefox, Edge) and phone frames (iPhone 17, iPhone 17 Pro, Samsung Galaxy S24). Upload screenshots, choose a device frame, and generate professional product showcase images with one click.">
+    <meta name="keywords" content="browser mockup generator, phone mockup generator, screenshot mockup generator, Chrome frame, Safari frame, iPhone frame, product screenshot, website showcase">
+    <link rel="canonical" href="https://mockupshot.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MockupShot - Browser Screenshot Mockup Generator">
+    <meta property="og:description" content="Free online browser screenshot mockup generator, supports multiple browser frame styles">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mockupshot.com/">
+    <meta property="og:image" content="https://mockupshot.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MockupShot - Browser Screenshot Mockup Generator">
+    <meta name="twitter:description" content="Free online browser screenshot mockup generator">
+
+    <!-- Schema.org WebApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MockupShot - Device Mockup Generator",
+        "url": "https://mockupshot.com/",
+        "description": "Free online device mockup generator. Upload screenshots and add browser frames (Chrome, Safari, Firefox, Edge) or device frames (iPhone, iPad, MacBook, iMac).",
+        "applicationCategory": "Multimedia",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "MockupShot"
+        }
+    }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🎨 MockupShot</h1>
+                <p class="tagline">Browser Screenshot Mockup Generator</p>
+            </div>
+            <nav class="nav">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2 class="hero-title">Make Your Screenshots Look Professional</h2>
+                <p class="hero-subtitle">Upload screenshots, choose a browser frame, and generate beautiful product showcase images with one click</p>
+            </section>
+
+            <!-- Ad Slot 1 - Leaderboard (top of content) -->
+            <div class="ad-container leaderboard">
+                <div class="ad-placeholder">Advertisement</div>
+            </div>
+
+            <!-- Tool Section -->
+            <section class="tool-section">
+                <div class="tool-container">
+                    <!-- Upload Section -->
+                    <div class="upload-section">
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                            <div class="upload-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                <p class="upload-text">Click or drag to upload screenshots</p>
+                                <p class="upload-hint">Supports PNG, JPG, WebP formats</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Options Section -->
+                    <div class="options-section">
+                        <div class="option-group">
+                            <label class="option-label">Select Device Type</label>
+                            <div class="device-selector">
+                                <div class="device-tabs">
+                                    <button class="device-tab active" data-category="browsers">Browsers</button>
+                                    <button class="device-tab" data-category="phones">Phones</button>
+                                    <button class="device-tab" data-category="tablets">Tablets</button>
+                                    <button class="device-tab" data-category="laptops">Laptops</button>
+                                    <button class="device-tab" data-category="desktop">Desktop</button>
+                                </div>
+
+                                <div class="device-content">
+                                    <!-- Browsers Category -->
+                                    <div class="device-category active" data-category="browsers">
+                                        <div class="browser-selector">
+                                            <button class="browser-btn active" data-device="chrome">
+                                                <span class="browser-icon">🌐</span>
+                                                <span class="browser-name">Chrome</span>
+                                            </button>
+                                            <button class="browser-btn" data-device="safari">
+                                                <span class="browser-icon">🧭</span>
+                                                <span class="browser-name">Safari</span>
+                                            </button>
+                                            <button class="browser-btn" data-device="firefox">
+                                                <span class="browser-icon">🦊</span>
+                                                <span class="browser-name">Firefox</span>
+                                            </button>
+                                            <button class="browser-btn" data-device="edge">
+                                                <span class="browser-icon">📘</span>
+                                                <span class="browser-name">Edge</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Phones Category -->
+                                    <div class="device-category" data-category="phones">
+                                        <div class="phone-selector">
+                                            <button class="phone-btn active" data-device="iphone-17">
+                                                <span class="phone-icon">📱</span>
+                                                <span class="phone-name">iPhone 17</span>
+                                            </button>
+                                            <button class="phone-btn" data-device="iphone-17-pro">
+                                                <span class="phone-icon">📱</span>
+                                                <span class="phone-name">iPhone 17 Pro</span>
+                                            </button>
+                                            <button class="phone-btn" data-device="iphone-17-pro-max">
+                                                <span class="phone-icon">📱</span>
+                                                <span class="phone-name">iPhone 17 Pro Max</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Laptops Category -->
+                                    <div class="device-category" data-category="laptops">
+                                        <div class="laptop-selector">
+                                            <button class="laptop-btn active" data-device="macbook-pro-16">
+                                                <span class="laptop-icon">💻</span>
+                                                <span class="laptop-name">MacBook Pro 16"</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tablets Category -->
+                                    <div class="device-category" data-category="tablets">
+                                        <div class="tablet-selector">
+                                            <button class="tablet-btn active" data-device="ipad-silver">
+                                                <span class="tablet-icon">📱</span>
+                                                <span class="tablet-name">iPad (Silver)</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Desktop Category -->
+                                    <div class="device-category" data-category="desktop">
+                                        <div class="desktop-selector">
+                                            <button class="desktop-btn active" data-device="imac-24">
+                                                <span class="desktop-icon">🖥️</span>
+                                                <span class="desktop-name">iMac 24"</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Background Style</label>
+                            <div class="background-selector">
+                                <button class="bg-btn active" data-bg="transparent" style="background: repeating-conic-gradient(#e0e0e0 0% 25%, #fff 0% 50%) 0 0 / 12px 12px;">
+                                    <span class="bg-name">Transparent</span>
+                                </button>
+                                <button class="bg-btn" data-bg="gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <span class="bg-name">Gradient Purple</span>
+                                </button>
+                                <button class="bg-btn" data-bg="blue" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <span class="bg-name">Gradient Blue</span>
+                                </button>
+                                <button class="bg-btn" data-bg="green" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <span class="bg-name">Gradient Green</span>
+                                </button>
+                                <button class="bg-btn" data-bg="solid" style="background: #f3f4f6;">
+                                    <span class="bg-name">Solid Gray</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Device Settings</label>
+                            <div class="device-settings">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="showShadow" checked>
+                                    <span>Show shadow</span>
+                                </label>
+                                <label class="checkbox-label" id="showFrameContainer">
+                                    <input type="checkbox" id="showFrame" checked>
+                                    <span>Show frame</span>
+                                </label>
+                                <div class="color-selector" id="colorSelectorContainer" style="display: none;">
+                                    <label class="color-label">Device color:</label>
+                                    <div class="color-options" id="colorOptions">
+                                        <!-- Color options will be dynamically generated -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Export Settings</label>
+                            <div class="export-controls">
+                                <select id="scaleSelect" class="scale-select">
+                                    <option value="1">1x Original Size</option>
+                                    <option value="2" selected>2x HD</option>
+                                    <option value="3">3x Ultra HD</option>
+                                </select>
+                                <button id="downloadBtn" class="download-btn" disabled>
+                                    <span class="btn-icon">⬇️</span>
+                                    <span class="btn-text">Download PNG</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="preview-section">
+                        <label class="option-label">Live Preview</label>
+                        <div class="preview-container transparent-bg" id="previewContainer">
+                            <canvas id="previewCanvas"></canvas>
+                            <div class="preview-placeholder">
+                                <p>👈 Upload a screenshot to preview here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ad Slot 2 - In-content (between tool and features) -->
+            <div class="ad-container in-content">
+                <div class="ad-placeholder">Advertisement</div>
+            </div>
+
+            <!-- Features -->
+            <section id="features" class="features-section">
+                <h2 class="section-title">Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">Multiple Device Frames</h3>
+                        <p class="feature-description">Support for Chrome, Safari, Firefox, Edge browsers plus iPhone, iPad, MacBook Pro, and iMac frames</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Real-time Preview</h3>
+                        <p class="feature-description">See the effect instantly after uploading, WYSIWYG experience</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title">Highly Customizable</h3>
+                        <p class="feature-description">Customize backgrounds, shadows, address bar and many other options</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📥</div>
+                        <h3 class="feature-title">HD Export</h3>
+                        <p class="feature-description">Supports 2x, 3x HD export for crisp and sharp showcase results</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section id="how-it-works" class="tutorial-section">
+                <h2 class="section-title">How It Works</h2>
+                <div class="tutorial-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Upload Screenshot</h3>
+                        <p class="step-description">Click the upload area or drag and drop your screenshot file onto the page</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Choose Frame</h3>
+                        <p class="step-description">Select your desired browser frame style and background</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Download & Use</h3>
+                        <p class="step-description">Click the download button to get your HD PNG image</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ad Slot 3 - Rectangle (bottom, before FAQ) -->
+            <div class="ad-container rectangle">
+                <div class="ad-placeholder">Advertisement</div>
+            </div>
+
+            <!-- Content Article for SEO -->
+            <section class="content-article">
+                <h2 class="section-title">Free Browser Mockup Generator — Create Professional Screenshot Frames Online</h2>
+                <div class="article-body">
+                    <p>Need to make your app or website screenshots look more professional? A browser mockup generator puts your screenshots inside realistic device frames so they stand out on landing pages, portfolios, social media, and pitch decks.</p>
+                    <p>MockupShot lets you upload any screenshot and wrap it in a Chrome, Safari, Firefox, or Edge browser frame. You get to tweak the background color, pick between light and dark address bars, and add soft shadows for that polished look. The result downloads as a high-res PNG at 2x or 3x resolution — crisp enough for dribbble shots or printed materials.</p>
+                    <p>We also support hardware device frames: iPhone, iPad, MacBook Pro, and iMac. So whether you're doing a mobile app store screenshot, a laptop product demo, or a full desktop app walkthrough, you can keep the same look and feel across all your screenshots. Read more on our <a href="chrome-browser-frame/">Chrome browser frame</a>, <a href="safari-browser-frame/">Safari screenshot frame</a>, <a href="macbook-screenshot-frame/">MacBook screenshot frame</a>, <a href="imac-screenshot-frame/">iMac screenshot frame</a>, and <a href="ipad-screenshot-frame/">iPad screenshot frame</a> pages.</p>
+                    <p>Every piece of processing happens in your browser. Nothing gets uploaded to a server, so your work stays private. It's free, no account needed, no watermarks, and you can use the generated images for anything — commercial or personal.</p>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq" class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3 class="faq-question">What image formats are supported?</h3>
+                        <p class="faq-answer">We support PNG, JPG, WebP and other common image formats. PNG format is recommended for best results.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Do the generated images have watermarks?</h3>
+                        <p class="faq-answer">Completely free and watermark-free. You are free to use the generated images however you like.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I use the images for commercial purposes?</h3>
+                        <p class="faq-answer">Yes, the generated images can be used for any commercial purpose without attribution, no strings attached.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Are my images saved on the server?</h3>
+                        <p class="faq-answer">No. All image processing is done locally in your browser using Canvas. Images are never uploaded to any server, ensuring your privacy.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is a browser mockup generator?</h3>
+                        <p class="faq-answer">A browser mockup generator places your screenshot inside a browser frame (Chrome, Safari, Firefox, or Edge) to create a realistic product showcase image. It's commonly used by designers and makers to present web apps, landing pages, and software demos.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I change the background color behind my screenshot?</h3>
+                        <p class="faq-answer">Yes. You can pick a solid color or a gradient background behind your device frame. There's also a transparent background option if you want to layer the result onto another design.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Do you support dark mode browser frames?</h3>
+                        <p class="faq-answer">Yes. Both light and dark address bar themes are available for Chrome, Safari, Firefox, and Edge frames. This helps match the aesthetic of your brand or website.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What's the difference between browser frames and device frames?</h3>
+                        <p class="faq-answer">Browser frames show just the browser chrome — tabs, address bar, window controls — and work best for website screenshots. Device frames (iPhone, iPad, MacBook, iMac) display your screenshot wrapped in a realistic hardware shell and are more suitable for mobile apps and desktop software showcases.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I generate a screenshot inside a MacBook frame?</h3>
+                        <p class="faq-answer">Absolutely. Our <a href="macbook-screenshot-frame/">MacBook screenshot frame</a> puts your image inside a realistic MacBook Pro 16-inch display, complete with the laptop body and bezel. It's one of our most popular options for product demos.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">How do I download the result in HD?</h3>
+                        <p class="faq-answer">Set the export scale to 2x (HD) or 3x (Ultra HD) before clicking download. Higher scales produce larger images with more detail, perfect for retina displays and print.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">&copy; 2026 MockupShot. Free Browser Screenshot Mockup Generator</p>
+            <div class="footer-links">
+                <a href="chrome-browser-frame/">Chrome Frame</a>
+                <a href="safari-browser-frame/">Safari Frame</a>
+                <a href="firefox-browser-frame/">Firefox Frame</a>
+                <a href="edge-browser-frame/">Edge Frame</a>
+                <a href="macbook-screenshot-frame/">MacBook Frame</a>
+                <a href="imac-screenshot-frame/">iMac Frame</a>
+                <a href="ipad-screenshot-frame/">iPad Frame</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# robots.txt for mockupshot.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mockupshot.com/sitemap.xml
+
+# Disallow specific paths if any
+# Disallow: /private/
+# Disallow: /admin/
+
+# Crawl-delay (optional, removes if not needed)
+# Crawl-delay: 1
