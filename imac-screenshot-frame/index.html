@@ -80,15 +80,7 @@
             margin: 0 auto;
             border-radius: 4px 4px 0 0;
         }
-        .breadcrumb {
-            padding: 0.75rem 0;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-        .breadcrumb a { color: var(--primary-color); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .breadcrumb-sep { margin: 0 0.5rem; }
-        .breadcrumb-current { color: var(--text-secondary); }
+        .breadcrumb { display: none; }
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -127,11 +119,7 @@
     <main class="main">
         <div class="container">
 
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="../">Home</a>
-                <span class="breadcrumb-sep">›</span>
-                <span class="breadcrumb-current">iMac Screenshot Frame Generator</span>
-            </nav>
+            <div class="breadcrumb"><a href="https://mockupshot.online/">Home</a><span class="separator">›</span><span class="current">iMac Screenshot Frame Generator</span></div>
             <!-- Ad Slot 1 -->
             <div class="ad-container leaderboard">
                 <div class="ad-placeholder">Advertisement</div>
