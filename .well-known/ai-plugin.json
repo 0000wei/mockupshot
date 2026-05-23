@@ -1,0 +1,40 @@
+{
+  "name": "MockupShot",
+  "description": "Free online device mockup generator. Upload screenshots and wrap them in browser frames (Chrome, Safari, Firefox, Edge) or device frames (iPhone, iPad, MacBook, iMac).",
+  "url": "https://mockupshot.online",
+  "category": "design",
+  "tags": ["mockup", "screenshot", "browser-frame", "device-frame", "design", "presentation"],
+  "tools": [
+    {
+      "name": "Mockup Generator",
+      "url": "https://mockupshot.online/",
+      "description": "Upload screenshots and add browser or device frames"
+    },
+    {
+      "name": "Chrome Browser Frame",
+      "url": "https://mockupshot.online/chrome-browser-frame/",
+      "description": "Chrome browser frame for screenshots"
+    },
+    {
+      "name": "Safari Browser Frame",
+      "url": "https://mockupshot.online/safari-browser-frame/",
+      "description": "Safari browser frame for screenshots"
+    },
+    {
+      "name": "MacBook Screenshot Frame",
+      "url": "https://mockupshot.online/macbook-screenshot-frame/",
+      "description": "MacBook Pro 16-inch device frame"
+    },
+    {
+      "name": "iMac Screenshot Frame",
+      "url": "https://mockupshot.online/imac-screenshot-frame/",
+      "description": "iMac 24-inch device frame"
+    },
+    {
+      "name": "iPad Screenshot Frame",
+      "url": "https://mockupshot.online/ipad-screenshot-frame/",
+      "description": "iPad Pro device frame"
+    }
+  ],
+  "x-claude-model-description": "MockupShot is a free online device mockup generator. All processing is client-side using Canvas API. Use a headless browser to interact with the tool: navigate to the page, upload screenshots, select frame types, customize settings, and download results."
+}

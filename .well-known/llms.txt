@@ -1,0 +1,10 @@
+# MockupShot — Free Online Device Mockup Generator
+
+| Tool | URL | Description |
+|------|-----|-------------|
+| Mockup Generator | https://mockupshot.online/ | Main tool - all frame types |
+| Chrome Frame | https://mockupshot.online/chrome-browser-frame/ | Chrome browser frame |
+| Safari Frame | https://mockupshot.online/safari-browser-frame/ | Safari browser frame |
+| MacBook Frame | https://mockupshot.online/macbook-screenshot-frame/ | MacBook Pro 16" frame |
+| iMac Frame | https://mockupshot.online/imac-screenshot-frame/ | iMac 24" frame |
+| iPad Frame | https://mockupshot.online/ipad-screenshot-frame/ | iPad Pro frame |

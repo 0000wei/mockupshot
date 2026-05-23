@@ -1,0 +1,31 @@
+# MockupShot — Free Online Device Mockup Generator
+
+> Upload screenshots and wrap them in browser frames (Chrome, Safari, Firefox, Edge) or device frames (iPhone, iPad, MacBook Pro, iMac). All processing runs in your browser — no uploads, no servers.
+
+## Core Tools
+
+- **Browser Mockup Generator** — https://mockupshot.online/
+  Choose from Chrome, Safari, Firefox, or Edge browser frames. Customize background colors, light/dark bars, and shadows. Export at 2x or 3x HD resolution.
+
+- **Chrome Browser Frame** — https://mockupshot.online/chrome-browser-frame/
+  - **Safari Browser Frame** — https://mockupshot.online/safari-browser-frame/
+  - **MacBook Screenshot Frame** — https://mockupshot.online/macbook-screenshot-frame/
+  - **iMac Screenshot Frame** — https://mockupshot.online/imac-screenshot-frame/
+  - **iPad Screenshot Frame** — https://mockupshot.online/ipad-screenshot-frame/
+
+## How It Works
+
+All processing uses the browser's Canvas API. Images never leave the user's device. Supports dark/light mode browser frames, solid and transparent backgrounds, and HD export at 2x-3x resolution.
+
+## For AI Agents
+
+MockupShot is a client-side static site. Use a headless browser to:
+1. Navigate to the tool page
+2. Upload a screenshot via file input or drag-and-drop
+3. Select frame type, customize settings
+4. Download the result
+
+## Related Projects
+
+- ILovePalette — color palette tools at https://ilovepalette.com
+- PicEte — image processing tools at https://picete.com
