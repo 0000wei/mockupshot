@@ -1075,6 +1075,7 @@ html[data-theme="dark"] {
     html[data-theme="dark"] .browser-btn {
         background: var(--bg-secondary);
         border-color: var(--border-color);
+        color: var(--text-color);
     }
 
     html[data-theme="dark"] .browser-btn:hover {
@@ -1085,6 +1086,7 @@ html[data-theme="dark"] {
     html[data-theme="dark"] .browser-btn.active {
         background: rgba(52, 211, 153, 0.2);
         border-color: var(--primary-color);
+        color: var(--primary-color);
     }
 
     /* Device Selector */
@@ -1118,27 +1120,29 @@ html[data-theme="dark"] {
 
     /* Phone/Device Buttons */
     html[data-theme="dark"] .phone-btn,
-    html[data-theme="dark"] .laptop-btn, html[data-theme="dark"] 
-    .tablet-btn,
-    .desktop-btn {
+    html[data-theme="dark"] .laptop-btn,
+    html[data-theme="dark"] .tablet-btn,
+    html[data-theme="dark"] .desktop-btn {
         background: var(--bg-secondary);
         border-color: var(--border-color);
+        color: var(--text-color);
     }
 
     html[data-theme="dark"] .phone-btn:hover,
-    .laptop-btn:hover,
-    .tablet-btn:hover,
-    .desktop-btn:hover {
+    html[data-theme="dark"] .laptop-btn:hover,
+    html[data-theme="dark"] .tablet-btn:hover,
+    html[data-theme="dark"] .desktop-btn:hover {
         background: rgba(52, 211, 153, 0.1);
         border-color: var(--primary-light);
     }
 
     html[data-theme="dark"] .phone-btn.active,
-    .laptop-btn.active,
-    .tablet-btn.active,
-    .desktop-btn.active {
+    html[data-theme="dark"] .laptop-btn.active,
+    html[data-theme="dark"] .tablet-btn.active,
+    html[data-theme="dark"] .desktop-btn.active {
         background: rgba(52, 211, 153, 0.2);
         border-color: var(--primary-color);
+        color: var(--primary-color);
     }
 
     /* Custom Background Options */
@@ -1234,6 +1238,7 @@ html[data-theme="dark"] {
     /* Background Button */
     html[data-theme="dark"] .bg-btn {
         border-color: var(--border-color);
+        color: var(--text-color);
     }
 
     /* Nav Link */
