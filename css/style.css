@@ -1289,7 +1289,7 @@ html[data-theme="dark"] {
 
     /* Logo: invert dark text to white for dark mode */
     html[data-theme="dark"] .logo-img {
-        content: url('/images/logo-dark.svg');
+        filter: brightness(0) invert(1);
     }
 
 .theme-toggle:focus-visible {
