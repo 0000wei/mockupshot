@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockupShot - 设备样机生成器 | 浏览器与手机框架工具</title>
+    <meta name="description" content="MockupShot 是一个免费的设备样机生成器。支持浏览器框架（Chrome、Safari、Firefox、Edge）和手机框架（iPhone 17、iPhone 17 Pro、Samsung Galaxy S24）。上传截图，选择设备框架，一键生成专业的产品展示图片。">
+    <meta name="keywords" content="浏览器样机生成器, 手机样机生成器, 截图样机生成器, Chrome 框架, Safari 框架, iPhone 框架, 产品截图, 网站展示">
+    <link rel="canonical" href="https://mockupshot.online/zh/">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MockupShot - 浏览器截图样机生成器">
+    <meta property="og:description" content="免费在线浏览器截图样机生成器，支持多种浏览器框架样式">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mockupshot.online/zh/">
+    <meta property="og:image" content="https://mockupshot.online/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MockupShot - 浏览器截图样机生成器">
+    <meta name="twitter:description" content="免费在线浏览器截图样机生成器">
+
+    <!-- AI Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Schema.org WebApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MockupShot - 设备样机生成器",
+        "url": "https://mockupshot.online/zh/",
+        "description": "免费在线设备样机生成器。上传截图并添加浏览器框架（Chrome、Safari、Firefox、Edge）或设备框架（iPhone、iPad、MacBook、iMac）。",
+        "applicationCategory": "Multimedia",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "MockupShot"
+        }
+    }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/zh/" title="MockupShot - 设备样机生成器">
+                    <img src="../images/logo.svg" alt="MockupShot" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="#features" class="nav-link">功能特点</a>
+                <a href="#how-it-works" class="nav-link">使用方法</a>
+                <a href="#faq" class="nav-link">常见问题</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">让您的截图看起来更专业</h1>
+                <p class="hero-subtitle">上传截图，选择浏览器框架，一键生成精美的产品展示图片</p>
+            </section>
+
+
+
+            <!-- Tool Section -->
+            <section class="tool-section">
+                <div class="tool-container">
+                    <!-- Upload Section -->
+                    <div class="upload-section">
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                            <div class="upload-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                <p class="upload-text">点击或拖拽上传截图</p>
+                                <p class="upload-hint">支持 PNG、JPG、WebP 格式</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Options Section -->
+                    <div class="options-section">
+                        <div class="option-group">
+                            <label class="option-label">选择设备类型</label>
+                            <div class="device-selector">
+                                <div class="device-tabs">
+                                    <button class="device-tab active" data-category="browsers">浏览器</button>
+                                    <button class="device-tab" data-category="phones">手机</button>
+                                    <button class="device-tab" data-category="tablets">平板</button>
+                                    <button class="device-tab" data-category="laptops">笔记本</button>
+                                    <button class="device-tab" data-category="desktop">台式机</button>
+                                </div>
+
+                                <div class="device-content">
+                                    <!-- Browsers Category -->
+                                    <div class="device-category active" data-category="browsers">
+                                        <div class="browser-selector">
+                                            <button class="browser-btn active" data-device="chrome">
+                                                <span class="browser-icon">🌐</span>
+                                                <span class="browser-name">Chrome</span>
+                                            </button>
+                                            <button class="browser-btn" data-device="safari">
+                                                <span class="browser-icon">🧭</span>
+                                                <span class="browser-name">Safari</span>
+                                            </button>
+                                            <button class="browser-btn" data-device="firefox">
+                                                <span class="browser-icon">🦊</span>
+                                                <span class="browser-name">Firefox</span>
+                                            </button>
+                                            <button class="browser-btn" data-device="edge">
+                                                <span class="browser-icon">📘</span>
+                                                <span class="browser-name">Edge</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Phones Category -->
+                                    <div class="device-category" data-category="phones">
+                                        <div class="phone-selector">
+                                            <button class="phone-btn active" data-device="iphone-17">
+                                                <span class="phone-icon">📱</span>
+                                                <span class="phone-name">iPhone 17</span>
+                                            </button>
+                                            <button class="phone-btn" data-device="iphone-17-pro">
+                                                <span class="phone-icon">📱</span>
+                                                <span class="phone-name">iPhone 17 Pro</span>
+                                            </button>
+                                            <button class="phone-btn" data-device="iphone-17-pro-max">
+                                                <span class="phone-icon">📱</span>
+                                                <span class="phone-name">iPhone 17 Pro Max</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Laptops Category -->
+                                    <div class="device-category" data-category="laptops">
+                                        <div class="laptop-selector">
+                                            <button class="laptop-btn active" data-device="macbook-pro-16">
+                                                <span class="laptop-icon">💻</span>
+                                                <span class="laptop-name">MacBook Pro 16"</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tablets Category -->
+                                    <div class="device-category" data-category="tablets">
+                                        <div class="tablet-selector">
+                                            <button class="tablet-btn active" data-device="ipad-silver">
+                                                <span class="tablet-icon">📱</span>
+                                                <span class="tablet-name">iPad (银色)</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Desktop Category -->
+                                    <div class="device-category" data-category="desktop">
+                                        <div class="desktop-selector">
+                                            <button class="desktop-btn active" data-device="imac-24">
+                                                <span class="desktop-icon">🖥️</span>
+                                                <span class="desktop-name">iMac 24"</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">背景样式</label>
+                            <div class="background-selector">
+                                <button class="bg-btn active" data-bg="transparent" style="background: repeating-conic-gradient(#e0e0e0 0% 25%, #fff 0% 50%) 0 0 / 12px 12px;">
+                                    <span class="bg-name">透明</span>
+                                </button>
+                                <button class="bg-btn" data-bg="gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <span class="bg-name">紫色渐变</span>
+                                </button>
+                                <button class="bg-btn" data-bg="blue" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <span class="bg-name">蓝色渐变</span>
+                                </button>
+                                <button class="bg-btn" data-bg="green" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <span class="bg-name">绿色渐变</span>
+                                </button>
+                                <button class="bg-btn" data-bg="solid" style="background: #f3f4f6;">
+                                    <span class="bg-name">纯色灰色</span>
+                                </button>
+                                <button class="bg-btn" data-bg="custom-color" style="background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);">
+                                    <span class="bg-name">自定义颜色</span>
+                                </button>
+                                <button class="bg-btn" data-bg="custom-gradient" style="background: linear-gradient(135deg, #ff6b6b, #c084fc);">
+                                    <span class="bg-name">自定义渐变</span>
+                                </button>
+                                <button class="bg-btn" data-bg="custom-image" style="background: repeating-linear-gradient(45deg, #ccc 0px, #ccc 10px, #aaa 10px, #aaa 20px);">
+                                    <span class="bg-name">自定义图片</span>
+                                </button>
+                            </div>
+                            <div class="custom-bg-options" id="customBgOptions" style="display: none;">
+                                <!-- Color picker for custom-color -->
+                                <div class="custom-bg-row" id="customColorRow" style="display: none;">
+                                    <label class="option-label" for="customColorPicker">选择颜色：</label>
+                                    <input type="color" id="customColorPicker" value="#667eea" class="color-picker">
+                                </div>
+                                <!-- Dual color picker for custom-gradient -->
+                                <div class="custom-bg-row" id="customGradientRow" style="display: none;">
+                                    <label class="option-label">渐变起始：</label>
+                                    <input type="color" id="customGradientFrom" value="#ff6b6b" class="color-picker">
+                                    <label class="option-label" style="margin-left:8px;">到：</label>
+                                    <input type="color" id="customGradientTo" value="#c084fc" class="color-picker">
+                                </div>
+                                <!-- Image upload for custom-image -->
+                                <div class="custom-bg-row" id="customImageRow" style="display: none;">
+                                    <label class="option-label">上传背景图片：</label>
+                                    <input type="file" id="customBgImageInput" accept="image/*" class="bg-image-input">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">设备设置</label>
+                            <div class="device-settings">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="showShadow" checked>
+                                    <span>显示阴影</span>
+                                </label>
+                                <label class="checkbox-label" id="showFrameContainer">
+                                    <input type="checkbox" id="showFrame" checked>
+                                    <span>显示框架</span>
+                                </label>
+                                <div class="color-selector" id="colorSelectorContainer" style="display: none;">
+                                    <label class="color-label">设备颜色：</label>
+                                    <div class="color-options" id="colorOptions">
+                                        <!-- Color options will be dynamically generated -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">导出设置</label>
+                            <div class="export-controls">
+                                <select id="scaleSelect" class="scale-select">
+                                    <option value="1">1x 原始尺寸</option>
+                                    <option value="2" selected>2x 高清</option>
+                                    <option value="3">3x 超高清</option>
+                                </select>
+                                <button id="downloadBtn" class="download-btn" disabled>
+                                    <span class="btn-icon">⬇️</span>
+                                    <span class="btn-text">下载 PNG</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="preview-section">
+                        <label class="option-label">实时预览</label>
+                        <div class="preview-container transparent-bg" id="previewContainer">
+                            <canvas id="previewCanvas"></canvas>
+                            <div class="preview-placeholder">
+                                <p>👈 上传截图以在此处预览</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Features -->
+            <section id="features" class="features-section">
+                <h2 class="section-title">功能特点</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">多种设备框架</h3>
+                        <p class="feature-description">支持 Chrome、Safari、Firefox、Edge 浏览器以及 iPhone、iPad、MacBook Pro 和 iMac 框架</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">实时预览</h3>
+                        <p class="feature-description">上传后即时查看效果，所见即所得的体验</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title">高度可定制</h3>
+                        <p class="feature-description">自定义背景、阴影、地址栏等多种选项</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📥</div>
+                        <h3 class="feature-title">高清导出</h3>
+                        <p class="feature-description">支持 2x、3x 高清导出，让展示效果清晰锐利</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section id="how-it-works" class="tutorial-section">
+                <h2 class="section-title">使用方法</h2>
+                <div class="tutorial-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">上传截图</h3>
+                        <p class="step-description">点击上传区域或将截图文件拖拽到页面上</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">选择框架</h3>
+                        <p class="step-description">选择您喜欢的浏览器框架样式和背景</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">下载使用</h3>
+                        <p class="step-description">点击下载按钮获取高清 PNG 图片</p>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Content Article for SEO -->
+            <section class="content-article">
+                <h2 class="section-title">免费浏览器样机生成器 — 在线创建专业截图框架</h2>
+                <div class="article-body">
+                    <p>需要让您的应用或网站截图看起来更专业吗？浏览器样机生成器可以将您的截图放入真实的设备框架中，让它们在落地页、作品集、社交媒体和演示文稿中脱颖而出。</p>
+                    <p>MockupShot 让您上传任何截图并将其包裹在 Chrome、Safari、Firefox 或 Edge 浏览器框架中。您可以调整背景颜色，选择浅色或深色地址栏，并添加柔和阴影以获得精致的外观。结果以高分辨率 PNG 格式下载，支持 2x 或 3x 分辨率 —— 清晰度足以用于 Dribbble 作品或印刷材料。</p>
+                    <p>我们还支持硬件设备框架：iPhone、iPad、MacBook Pro 和 iMac。因此，无论您是在制作应用商店截图、笔记本产品演示还是完整桌面应用演示，都可以在所有截图中保持一致的外观和风格。了解更多，请访问我们的 <a href="/zh/chrome-browser-frame/">Chrome 浏览器框架</a>、<a href="/zh/safari-browser-frame/">Safari 截图框架</a>、<a href="/zh/macbook-screenshot-frame/">MacBook 截图框架</a>、<a href="/zh/imac-screenshot-frame/">iMac 截图框架</a>和 <a href="/zh/ipad-screenshot-frame/">iPad 截图框架</a>页面。</p>
+                    <p>所有处理都在您的浏览器中进行。不会上传任何内容到服务器，因此您的工作保持私密。完全免费，无需注册，无水印，生成的图像可用于任何用途 —— 商业或个人。</p>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq" class="faq-section">
+                <h2 class="section-title">常见问题</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3 class="faq-question">支持哪些图片格式？</h3>
+                        <p class="faq-answer">我们支持 PNG、JPG、WebP 等常见图片格式。建议使用 PNG 格式以获得最佳效果。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">生成的图片有水印吗？</h3>
+                        <p class="faq-answer">完全免费且无水印。您可以自由使用生成的图片，无需任何限制。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">可以将图片用于商业用途吗？</h3>
+                        <p class="faq-answer">可以，生成的图片可用于任何商业用途，无需署名，没有任何附加条件。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">我的图片会保存在服务器上吗？</h3>
+                        <p class="faq-answer">不会。所有图片处理都在您的浏览器中使用 Canvas 本地完成。图片绝不会上传到任何服务器，确保您的隐私。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">什么是浏览器样机生成器？</h3>
+                        <p class="faq-answer">浏览器样机生成器将您的截图放入浏览器框架（Chrome、Safari、Firefox 或 Edge）中，以创建逼真的产品展示图片。设计师和创作者通常使用它来展示网络应用、落地页和软件演示。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">可以更改截图背景颜色吗？</h3>
+                        <p class="faq-answer">可以。您可以在设备框架后面选择纯色或渐变背景。如果要将结果叠加到另一个设计上，还有透明背景选项。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">支持深色模式浏览器框架吗？</h3>
+                        <p class="faq-answer">支持。Chrome、Safari、Firefox 和 Edge 框架都有浅色和深色地址栏主题。这有助于匹配您的品牌或网站的美学风格。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">浏览器框架和设备框架有什么区别？</h3>
+                        <p class="faq-answer">浏览器框架仅显示浏览器外观 —— 标签页、地址栏、窗口控制 —— 最适合网站截图。设备框架（iPhone、iPad、MacBook、iMac）将您的截图包裹在逼真的硬件外壳中，更适合移动应用和桌面软件展示。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">可以生成 MacBook 框架内的截图吗？</h3>
+                        <p class="faq-answer">当然可以。我们的 <a href="/zh/macbook-screenshot-frame/">MacBook 截图框架</a>将您的图片放入逼真的 MacBook Pro 16 英寸显示器中，包含笔记本主体和边框。这是我们最受欢迎的产品演示选项之一。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">如何下载高清结果？</h3>
+                        <p class="faq-answer">在点击下载之前，将导出比例设置为 2x（高清）或 3x（超高清）。更高的比例会生成更大、更详细的图片，非常适合视网膜显示屏和印刷。</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">&copy; 2026 MockupShot. 免费浏览器截图样机生成器</p>
+            <div class="footer-links">
+                <a href="/zh/chrome-browser-frame/">Chrome 框架</a>
+                <a href="/zh/safari-browser-frame/">Safari 框架</a>
+                <a href="/zh/firefox-browser-frame/">Firefox 框架</a>
+                <a href="/zh/edge-browser-frame/">Edge 框架</a>
+                <a href="/zh/macbook-screenshot-frame/">MacBook 框架</a>
+                <a href="/zh/imac-screenshot-frame/">iMac 框架</a>
+                <a href="/zh/ipad-screenshot-frame/">iPad 框架</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://picete.com/">PicEte - 图片工具</a>
+                <a href="https://ilovepalette.com/">ILovePalette - 颜色工具</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js?v=2"></script>
+</body>
+</html>
