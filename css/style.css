@@ -1014,3 +1014,231 @@ body {
     color: #1f2937;
     font-weight: 600;
 }
+
+/* ========================================
+   Dark Mode
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #F9FAFB;
+        --text-secondary: #D1D5DB;
+        --border-color: #374151;
+        --bg-color: #111827;
+        --white: #1F2937;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Header */
+    .header {
+        background: #1F2937;
+        border-bottom: 1px solid #374151;
+    }
+
+    /* Hero */
+    .hero {
+        background: transparent;
+    }
+
+    /* Ad Banner */
+    .ad-banner {
+        background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+        border-color: #374151;
+    }
+
+    /* Tool Section */
+    .tool-section {
+        background: #1F2937;
+    }
+
+    /* Upload Area */
+    .upload-area {
+        background: rgba(31, 41, 55, 0.5);
+        border-color: #374151;
+    }
+
+    .upload-area:hover {
+        background: #1F2937;
+        border-color: var(--primary-color);
+    }
+
+    .upload-area.dragover {
+        background: rgba(16, 185, 129, 0.1);
+    }
+
+    /* Browser Selector */
+    .browser-btn {
+        background: #1F2937;
+        border-color: #374151;
+    }
+
+    .browser-btn:hover {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: var(--primary-light);
+    }
+
+    .browser-btn.active {
+        background: rgba(16, 185, 129, 0.2);
+        border-color: var(--primary-color);
+    }
+
+    /* Device Selector */
+    .device-selector {
+        border-color: #374151;
+    }
+
+    .device-tabs {
+        background: #111827;
+        border-bottom-color: #374151;
+    }
+
+    .device-tab {
+        color: #9CA3AF;
+    }
+
+    .device-tab:hover {
+        background: #1F2937;
+        color: #F9FAFB;
+    }
+
+    .device-tab.active {
+        background: #1F2937;
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+    }
+
+    .device-content {
+        background: #1F2937;
+    }
+
+    /* Phone/Device Buttons */
+    .phone-btn,
+    .laptop-btn,
+    .tablet-btn,
+    .desktop-btn {
+        background: #1F2937;
+        border-color: #374151;
+    }
+
+    .phone-btn:hover,
+    .laptop-btn:hover,
+    .tablet-btn:hover,
+    .desktop-btn:hover {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: var(--primary-light);
+    }
+
+    .phone-btn.active,
+    .laptop-btn.active,
+    .tablet-btn.active,
+    .desktop-btn.active {
+        background: rgba(16, 185, 129, 0.2);
+        border-color: var(--primary-color);
+    }
+
+    /* Custom Background Options */
+    .custom-bg-options {
+        background: #111827;
+        border-color: #374151;
+    }
+
+    .color-picker {
+        border-color: #374151;
+    }
+
+    .color-picker:hover {
+        border-color: var(--primary-color);
+    }
+
+    /* Select */
+    .scale-select {
+        background: #111827;
+        color: #F9FAFB;
+        border-color: #374151;
+    }
+
+    /* Preview Container */
+    .preview-container {
+        background: #111827;
+        border-color: #374151;
+    }
+
+    .preview-container.transparent-bg {
+        background: repeating-conic-gradient(#374151 0% 25%, #1F2937 0% 50%) 0 0 / 16px 16px;
+    }
+
+    /* Feature Card */
+    .feature-card {
+        background: #1F2937;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Step */
+    .step {
+        background: #1F2937;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* FAQ Item */
+    .faq-item {
+        background: #1F2937;
+    }
+
+    /* Footer */
+    .footer {
+        background: #1F2937;
+        border-top-color: #374151;
+    }
+
+    .footer-links a {
+        color: #9CA3AF;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary-light);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        color: #9CA3AF;
+    }
+
+    .breadcrumb a {
+        color: #9CA3AF;
+    }
+
+    .breadcrumb a:hover {
+        color: var(--primary-color);
+    }
+
+    .breadcrumb .separator,
+    .breadcrumb-sep {
+        color: #6B7280;
+    }
+
+    .breadcrumb .current,
+    .breadcrumb-current {
+        color: #F9FAFB;
+    }
+
+    /* Color Button */
+    .color-btn {
+        border-color: #4B5563;
+    }
+
+    /* Background Button */
+    .bg-btn {
+        border-color: #4B5563;
+    }
+
+    /* Nav Link */
+    .nav-link {
+        color: #9CA3AF;
+    }
+
+    .nav-link:hover {
+        color: #F9FAFB;
+    }
+}
