@@ -1283,9 +1283,14 @@ html[data-theme="dark"] {
     border-color: var(--primary-color);
 }
 
-html[data-theme="dark"] .theme-toggle:hover {
-    background-color: var(--bg-secondary);
-}
+    html[data-theme="dark"] .theme-toggle:hover {
+        background-color: var(--bg-secondary);
+    }
+
+    /* Logo: invert dark text to white, remove white bg to transparent */
+    html[data-theme="dark"] .logo-img {
+        filter: brightness(0) invert(1);
+    }
 
 .theme-toggle:focus-visible {
     outline: 2px solid var(--primary-color);
