@@ -1287,9 +1287,9 @@ html[data-theme="dark"] {
         background-color: var(--bg-secondary);
     }
 
-    /* Logo: invert dark text to white for dark mode */
+    /* Logo: swap to white-on-transparent version for dark mode */
     html[data-theme="dark"] .logo-img {
-        filter: brightness(0) invert(1);
+        content: url('/images/logo-dark.svg');
     }
 
 .theme-toggle:focus-visible {
