@@ -785,3 +785,25 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', () => {
     new MockupShot();
 });
+
+
+// Theme Toggle
+(function() {
+    const toggle = document.getElementById('themeToggle');
+    if (!toggle) return;
+    
+    const stored = localStorage.getItem('mockupshot_theme');
+    if (stored) {
+        document.documentElement.setAttribute('data-theme', stored);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('mockupshot_theme', 'dark');
+    }
+    
+    toggle.addEventListener('click', function() {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('mockupshot_theme', next);
+    });
+})();
