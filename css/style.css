@@ -223,6 +223,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .browser-btn:hover {
@@ -236,6 +237,9 @@ body {
     color: var(--primary-dark);
 }
 
+.browser-name {
+    color: var(--text-color);
+}
 .browser-icon {
     font-size: 1.25rem;
 }
@@ -324,6 +328,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .phone-btn:hover {
@@ -344,6 +349,7 @@ body {
 .phone-name {
     font-size: 0.75rem;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 /* Laptop Selector */
@@ -365,6 +371,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .laptop-btn:hover {
@@ -385,6 +392,7 @@ body {
 .laptop-name {
     font-size: 0.75rem;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 /* Tablet Selector */
@@ -406,6 +414,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .tablet-btn:hover {
@@ -426,6 +435,7 @@ body {
 .tablet-name {
     font-size: 0.75rem;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 /* Desktop Selector */
@@ -447,6 +457,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .desktop-btn:hover {
@@ -467,6 +478,7 @@ body {
 .desktop-name {
     font-size: 0.75rem;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 /* Device Settings */
