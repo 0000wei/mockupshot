@@ -280,16 +280,22 @@
         var btn = document.getElementById('themeToggle');
         if(!btn) return;
         var t = localStorage.getItem('mockupshot_theme');
-        if(t) {
+        function setTheme(t){
             document.documentElement.setAttribute('data-theme', t);
+            var logo = document.querySelector('.logo-img');
+            if(logo) logo.src = t === 'dark' ? '/images/logo-dark.svg' : '/images/logo.svg';
+        }
+        var t = localStorage.getItem('mockupshot_theme');
+        if(t) {
+            setTheme(t);
         } else if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-            document.documentElement.setAttribute('data-theme', 'dark');
+            setTheme('dark');
             localStorage.setItem('mockupshot_theme', 'dark');
         }
         btn.onclick = function(){
             var cur = document.documentElement.getAttribute('data-theme');
             var next = cur === 'dark' ? '' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
+            setTheme(next);
             localStorage.setItem('mockupshot_theme', next || 'light');
         };
     })();
